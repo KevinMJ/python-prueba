@@ -7,13 +7,18 @@ Programmer: KevMJ
 """
 
 #Inputs
-width = int(input("Type in the width of the plot of land"))
-lenght = int(input("Type in the length of the plot of land"))
+width = int(input("Type in the width of the plot of land: "))
+lenght = int(input("Type in the length of the plot of land: "))
+m2_price = int(input("Type in the price per square meter: "))
 
 #Program
 area = width * lenght
 
-if area 
+if area > 400: 
+    price = m2_price * area * .90
+else:
+    price = m2_price * area
 
 #Outputs
-print("The plot of land has an área of {area} and is priced at {price}")
+
+print(f"The plot of land has an área of {area} and is priced at ${price:.2f}")
