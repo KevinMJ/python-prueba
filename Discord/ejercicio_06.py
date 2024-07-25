@@ -93,4 +93,4 @@ if three_digit_whole_number < 1000: # Conditional to check if is three-digit who
 
 
 #Outputs
-print(f"Your number written in reverse is: {third_digit}{second_digit}{first_digit}")∫
+print(f"Your number written in reverse is: {third_digit}{second_digit}{first_digit}")
