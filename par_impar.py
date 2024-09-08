@@ -11,4 +11,3 @@ def par_impar(numero):
 		print("intenta nuevamente")
 		main()
 main()
-
