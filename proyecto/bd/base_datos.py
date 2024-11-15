@@ -207,9 +207,13 @@ class BaseDatos:
             print("Aquí tienes las tablas existentes en esa base de datos: ")
             self.cursor.execute(f"SHOW TABLES")
             resultado = self.cursor.fetchall()
+            #Evalúa si hay tablas en la base de datos
+            if resultado == []:
+                print("No hay tablas en esta base de datos")
+            else:
             # Recorre los resultados y los muestra por pantalla
-            for tabla in resultado:
-                print(f"-{tabla[0]}")
+                for tabla in resultado:
+                    print(f"-{tabla[0]}")
         except:
             print("Revisa la instrucción para mostrar tablas")
 
@@ -234,3 +238,36 @@ class BaseDatos:
                 print(f"-{columna[0]} ({columna[1]} {not_null} {primary_key} {foreign_key})")
         except:
             print(f"Revisa haber escrito correctamente este nombre --> '{nombre_tabla}'")
+    
+    #Método para insertar registros en una tabla
+    @conexion
+    def insertar_registro(self,nombre_bd, nombre_tabla, registro):
+        self.cursor.execute(f"USE {nombre_bd}")
+
+        if not registro: # Verifica si el registro no está vacio
+            print("La lista del registro está vacía")
+            return
+        
+        # Obtener las columnas y los valores de cada diccionario
+        columnas = []
+        valores = []
+        for registro in registro:
+            columnas.extend(registro.keys())
+            valores.extend(registro.values())
+        
+        #Convertir las columnas y los valores a strings
+        columnas_string = ''
+        for columna in columnas:
+            columnas_string +=f"{columna}, "
+        columnas_string = columnas_string[:-2] #Para quitar la última coma y el espacio
+
+        valores_string = ''
+        for valor in valores:
+            valores_string += f"'{valor}', "
+        valores_string = valores_string[:-2]
+
+        #Crear la instrucción de la inserción
+        sql = f"INSERT INTO {nombre_tabla} ({columnas_string}) VALUES ({valores_string})"
+        self.cursor.execute(sql)
+        self.conector.commit()
+        print("Registro añadido en la tabla")

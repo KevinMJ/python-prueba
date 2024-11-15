@@ -3,4 +3,9 @@ import bd.tablas as tbl
 
 base_datos = sqlbd.BaseDatos(**sqlbd.acceso_bd)
 
-base_datos.mostrar_tablas("world")
+registro = [{"nombre": "Enrique",
+ "apellidos" : "Barros Fernández",
+ "telefono" : "786959404",
+ "direccion" : "C/cualquiera"}]
+
+base_datos.insertar_registro("pruebas","usuarios",registro)
